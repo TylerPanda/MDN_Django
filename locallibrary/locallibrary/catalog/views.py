@@ -28,14 +28,15 @@ def index(request):
     return render(request, 'index.html', context = context)
 
 class BookListView(generic.ListView):
-    model = Book
+    model = Book;
+    # paginate_by = 1;
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
-        context = super(BookListView, self).get_context_data(**kwargs)
+        context = super(BookListView, self).get_context_data(**kwargs);
         # Create any data and add it to the context
-        context['some_data'] = 'This is just some data'
-        return context
+        context['some_data'] = 'This is just some data';
+        return context;
 
 
 class BookDetailView(generic.DetailView):
@@ -46,4 +47,22 @@ class BookDetailView(generic.DetailView):
             book = Book.objects.get(pk = primary_key);
         except Book.DoesNotExist:
             raise Http404('Book does not exist.');
-        return render(request, 'catalog/book_detail.html', context = {'book': book})
+        return render(request, 'catalog/book_detail.html', context = {'book': book});
+
+class AuthorListView(generic.ListView):
+    model = Author;
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorListView, self).get_context_data(**kwargs);
+        context['some_data'] = 'This is just some date';
+        return context;
+
+class AuthorDetailView(generic.DetailView):
+    model = Author;
+
+    def author_detail_view(request):
+        try:
+            author = Author.objects.get(pk = primary_key);
+        except Book.DoesNotExist:
+            raise Http404('Book does not exist.');
+        return render(request, 'catalog/author_detail.html', context = {'author': author});
