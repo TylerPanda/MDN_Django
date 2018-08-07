@@ -8,7 +8,7 @@ from .models import Author, Book, BookInstance, Genre
 class AuthorAdmin(admin.ModelAdmin):
     # pass;
     list_display = ('last_name', 'first_name', 'date_of_birth', 'date_of_death');
-    fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
+    fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death'), 'all_books']
 
 """Register the admin class with the associated model"""
 admin.site.register(Author, AuthorAdmin)
